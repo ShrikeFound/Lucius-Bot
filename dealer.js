@@ -4,13 +4,8 @@ const createDeck = (suits, values, center, descendant) => {
   deck.cards = new Array();
   deck.discard = new Array();
   deck.hand = new Array();
-  console.log("argument length", arguments.length)
-  console.log("argument 0", arguments[0])
-  console.log("argument 1", arguments[1])
-  console.log("argument 2", arguments[2])
-  console.log("argument 3", arguments[3])
-  // console.log("argument 4",arguments[4])
-  if (arguments.length == 4) {
+  if (suits && values && center && descendant) {
+    console.log("creating twist deck");
     //create defining cards
     definining_values = [1, 5, 9, 13];
     ascendant_values = [4, 8, 12];
@@ -30,6 +25,7 @@ const createDeck = (suits, values, center, descendant) => {
     add_twist_set(center_values, center);
     add_twist_set(descendant_values, descendant);
   } else {
+    console.log("creating fate deck");
     for (var i = 0; i < suits.length; i++) {
       for (var j = 0; j < values.length; j++) {
         var card = { value: values[j], suit: suits[i] };
