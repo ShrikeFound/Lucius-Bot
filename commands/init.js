@@ -11,7 +11,6 @@ module.exports = {
     const admin = require('firebase-admin');
     const guildID = message.channel.guild.id
     const channelString = `channels/${guildID}`
-    console.log(typeof guildID)
     const fateDeck = createDeck(suits,values)
     let db = admin.database();
     let channelRef = db.ref(channelString);

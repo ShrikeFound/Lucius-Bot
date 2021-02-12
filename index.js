@@ -27,7 +27,7 @@ let channelsRef = db.ref("channels");
 
 channelsRef.on("child_added", (snapshot, prevChildKey) =>{
   let newChannel = snapshot.val();
-  console.log(newChannel);
+  console.log(newChannel.id);
 })
 
 

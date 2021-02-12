@@ -1,0 +1,55 @@
+const {shuffle} = require('../dealer.js')
+module.exports = {
+  name: 'flip',
+  description: 'Show the fate deck.',
+  async execute(bot,message, args) {
+    const numFlips = args.join(" ").match(/\d+/)[0]
+    console.log(numFlips)
+    const admin = require('firebase-admin');
+    const guildID = message.channel.guild.id
+    const channelString = `channels/${guildID}`
+    let db = admin.database();
+    let channelRef = db.ref(channelString);
+
+
+    channelRef.once('value', (data) => {
+      if (data.val().fate_deck) {
+        deckRef = db.ref(channelString+"/fate_deck")
+        const flippedCards = []
+        for (let i = 0; i < numFlips; i++){
+          deckRef.once('value',(snapshot) =>{
+            let fateDeck = snapshot.val();
+            fateDeck.hand = snapshot.val().hand || []
+            fateDeck.discard = snapshot.val().discard || []
+            fateDeck.cards = snapshot.val().cards || []
+            if(fateDeck.cards.length <= 0){
+              if (fateDeck.discard.length <= 0) return;
+              fateDeck.cards = fateDeck.discard;
+              fateDeck.discard = [];
+              shuffle(fateDeck);
+              deckRef.update(fateDeck)
+            }
+            flippedCard = fateDeck.cards.shift();
+            flippedCards.push(flippedCard);
+            fateDeck.hand.push(flippedCard)
+            deckRef.update(fateDeck)
+            console.log("flipped card: ",flippedCard)
+          });
+          
+        }
+
+        deckRef.once('value',(snapshot)=>{
+          let discard = snapshot.val().discard || [];
+          const hand = snapshot.val().hand;
+          discard = discard.concat(hand)
+          deckRef.update({"hand":[]})
+          deckRef.update({"discard":discard})
+        })        
+        console.log(flippedCards);
+      }else{
+        //whoops. error code of some sort.
+        console.log("couldn't find a deck to flip...");
+      }
+    })
+  }
+}

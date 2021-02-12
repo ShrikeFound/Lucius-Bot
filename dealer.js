@@ -42,6 +42,7 @@ const test = () => {
 }
 
 const shuffle = (deck) => {
+  console.log("shuffling...");
   deck.cards = deck.cards.concat(deck.discard);
   deck.cards = deck.cards.concat(deck.hand);
   deck.discard = [];
