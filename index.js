@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
-const { token , suits, values} = require('./config.json');
+const { token } = require('./config.json');
 const bot = new Discord.Client();
-const {createDeck,test} = require('./dealer.js')
 
 
 
@@ -9,6 +8,7 @@ bot.commands = new Discord.Collection();
 bot.events = new Discord.Collection();
 
 ['event_handler.js', 'command_handler.js'].forEach((handler) => {
+  console.log("handlin'",handler);
   require(`./handlers/${handler}`)(bot, Discord);
 });
 
@@ -22,21 +22,12 @@ admin.initializeApp({
 
 //firebase references
 let db = admin.database();
-let usersRef = db.ref("users");
 let channelsRef = db.ref("channels");
 
 channelsRef.on("child_added", (snapshot, prevChildKey) =>{
   let newChannel = snapshot.val();
   console.log(newChannel.id);
 })
-
-
-// initializeFateDeck();
-
-
-
-
-
 
 bot.login(token);
 
