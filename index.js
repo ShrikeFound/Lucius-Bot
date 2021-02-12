@@ -31,15 +31,6 @@ channelsRef.on("child_added", (snapshot, prevChildKey) =>{
 })
 
 
-const initializeFateDeck = async () => {
-  let fateDeckValues = createDeck(suits,values);
-  usersRef.child("fatedeck").set({
-    cards: fateDeckValues.cards,
-    hand: fateDeckValues.hand,
-    discard: fateDeckValues.discard
-  });
-}
-
 // initializeFateDeck();
 
 
