@@ -4,6 +4,12 @@ const createDeck = (suits, values, center, descendant) => {
   deck.cards = new Array();
   deck.discard = new Array();
   deck.hand = new Array();
+  console.log("argument length", arguments.length)
+  console.log("argument 0", arguments[0])
+  console.log("argument 1", arguments[1])
+  console.log("argument 2", arguments[2])
+  console.log("argument 3", arguments[3])
+  // console.log("argument 4",arguments[4])
   if (arguments.length == 4) {
     //create defining cards
     definining_values = [1, 5, 9, 13];
@@ -36,6 +42,30 @@ const createDeck = (suits, values, center, descendant) => {
   shuffle(deck);
   return deck;
 }
+
+const findSuit = (string) => {
+  char = string.charAt(0).toLowerCase();
+  suit = "";
+  switch (char) {
+    case "m":
+      suit = "masks";
+      break;
+    case "r":
+      suit = "rams";
+      break;
+    case "c":
+      suit = "crows";
+      break;
+    case "t":
+      suit = "tomes";
+      break;
+    default:
+      suit = "outcasts";
+      break;
+  }
+  return suit;
+}
+
 
 const test = () => {
   console.log('dealer activated!');
