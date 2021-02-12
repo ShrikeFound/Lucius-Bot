@@ -4,7 +4,12 @@ module.exports = {
   description: 'Show the fate deck.',
   async execute(bot, message, args) {
     console.log("flipping..");
-    const numFlips = args.join(" ").match(/\d+/)[0]
+    let numFlips = args.join(" ").match(/\d+/)
+    if (!numFlips || !(args.join(" ").match(/\d+/)[0] > 0)) {
+      numFlips = 1;
+    } else {
+      numFlips = numFlips[0]
+    }
     const flippedCards = []
     console.log(numFlips)
     const admin = require('firebase-admin');

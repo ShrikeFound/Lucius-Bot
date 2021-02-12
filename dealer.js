@@ -62,6 +62,31 @@ const findSuit = (string) => {
   return suit;
 }
 
+const draw = (deck, numflips) => {
+  console.log("drawing...");
+  let drawnCards = []
+  deck.cards = deck.cards || [];
+  deck.hand = deck.hand || [];
+  deck.discard = deck.discard || [];
+  for (let i = 0; i < numflips; i++){
+    if (deck.cards.length <= 0) {
+      console.log("no more cards in twist deck")
+      if (deck.discard.length <= 0) break;
+      deck.cards = deck.discard;
+      shuffle(deck);
+    }
+    let drawnCard = deck.cards.shift();
+    drawnCards.unshift(drawnCard);
+  }
+
+  deck.hand = deck.hand.concat(drawnCards);
+
+  deck.hand.sort((a, b) => {
+    return a.value - b.value;
+  });
+
+}
+
 
 const test = () => {
   console.log('dealer activated!');
@@ -85,5 +110,5 @@ const shuffle = (deck) => {
 
 
 module.exports = {
-  createDeck,test,shuffle
+  createDeck,test,shuffle,draw
 }

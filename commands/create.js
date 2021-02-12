@@ -1,4 +1,4 @@
-const { createDeck } = require('../dealer.js')
+const { createDeck,draw } = require('../dealer.js');
 module.exports = {
   name: 'create',
   description: 'this is the description for the create command',
@@ -7,7 +7,7 @@ module.exports = {
     const ascendant_suit = args[1] || "unknown";
     const center_suit = args[2] || "unknown";
     const descendant_suit = args[3] || "unknown";
-    const twistDeck = createDeck(definining_suit,ascendant_suit,center_suit,descendant_suit);
+    let twistDeck = createDeck(definining_suit,ascendant_suit,center_suit,descendant_suit);
 
     const admin = require('firebase-admin');
     const guildID = message.channel.guild.id
@@ -15,6 +15,8 @@ module.exports = {
     const userString = `channels/${guildID}/users/${userID}`
     let db = admin.database();
     let userRef = db.ref(userString);
+    draw(twistDeck, 3)
+    console.log("after drawing..",twistDeck);
     userRef.once("value", ((snapshot)=> {
       userRef.update({ "id": userID ,"twist_deck":twistDeck})
       // const controlHand = createDeck()
