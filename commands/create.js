@@ -19,7 +19,7 @@ module.exports = {
       userRef.update({ "id": userID ,"twist_deck":twistDeck})
       // const controlHand = createDeck()
     })).then(() => {
-      message.reply("Twist Deck Created!")
+      message.reply("Twist deck created!")
     })
 
     
