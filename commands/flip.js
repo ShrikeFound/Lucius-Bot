@@ -2,7 +2,8 @@ const {shuffle} = require('../dealer.js')
 module.exports = {
   name: 'flip',
   description: 'Show the fate deck.',
-  async execute(bot,message, args) {
+  async execute(bot, message, args) {
+    console.log("flipping..");
     const numFlips = args.join(" ").match(/\d+/)[0]
     const flippedCards = []
     console.log(numFlips)
@@ -34,7 +35,6 @@ module.exports = {
             flippedCards.push(flippedCard);
             fateDeck.hand.push(flippedCard)
             deckRef.update(fateDeck)
-            // console.log("flipped card: ", flippedCard)
           });
           
         }

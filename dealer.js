@@ -42,9 +42,10 @@ const test = () => {
 }
 
 const shuffle = (deck) => {
+  console.log("length before:",deck.cards.length,deck.discard && deck.discard.length);
   console.log("shuffling...");
-  deck.cards = deck.cards.concat(deck.discard);
-  deck.cards = deck.cards.concat(deck.hand);
+  deck.cards = deck.cards.concat(deck.discard || []);
+  deck.cards = deck.cards.concat(deck.hand || []);
   deck.discard = [];
   deck.hand = [];
   for (var i = 0; i < 1000; i++) {
@@ -53,7 +54,7 @@ const shuffle = (deck) => {
     deck.cards[0] = deck.cards[randomLocation];
     deck.cards[randomLocation] = temp;
   }
-  console.log(deck.cards.length);
+  console.log("length after:",deck.cards.length,deck.discard && deck.discard.length);
 }
 
 
