@@ -5,7 +5,7 @@ module.exports = {
   description: 'this is the description for the draw command',
   async execute(bot, message, args) {
     let numDraws = args.join(" ").match(/\d+/)
-    let fateDeck = {}
+    let Deck = {}
     if (!numDraws || !(args.join(" ").match(/\d+/)[0] > 0)) {
       numDraws = 1;
     } else {
@@ -19,11 +19,11 @@ module.exports = {
     let db = admin.database();
     deckRef = db.ref(deckString)
     deckRef.once("value", (snapshot) => {
-      fateDeck = snapshot.val();
-      draw(fateDeck, numDraws);
-      deckRef.set(fateDeck);
+      Deck = snapshot.val();
+      draw(Deck, numDraws);
+      deckRef.set(Deck);
     }).then(() => {
-      message.author.send(`${JSON.stringify(fateDeck)}`);
+      message.author.send(`${JSON.stringify(Deck)}`);
     })
   }
 }

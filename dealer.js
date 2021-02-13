@@ -40,8 +40,9 @@ const createDeck = (suits, values, center, descendant) => {
 }
 
 const findSuit = (string) => {
-  char = string.charAt(0).toLowerCase();
+  char = string.trim().charAt(0).toLowerCase();
   suit = "";
+  
   switch (char) {
     case "m":
       suit = "masks";
@@ -88,6 +89,26 @@ const draw = (deck, numflips) => {
 }
 
 
+const cheat = (deck, value, suit) => {
+  deck.hand = deck.hand || [];
+  deck.discard = deck.discard || [];
+  console.log(deck.hand);
+  console.log(typeof value);
+  let cheatedCard = deck.hand.find(card => {
+    return card.value === value;
+  });
+  if (!cheatedCard) {
+    return cheatedCard
+  }
+  deck.hand = deck.hand.filter(card => {
+    return card.value !== value;
+  })
+  deck.discard = deck.discard.concat(cheatedCard);
+
+  return cheatedCard;
+}
+
+
 const test = () => {
   console.log('dealer activated!');
 }
@@ -110,5 +131,5 @@ const shuffle = (deck) => {
 
 
 module.exports = {
-  createDeck,test,shuffle,draw
+  createDeck,test,shuffle,draw,findSuit,cheat
 }
