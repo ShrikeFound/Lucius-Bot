@@ -4,6 +4,13 @@ module.exports = {
   name: 'cheat',
   description: 'this is the description for the cheat command',
   async execute(bot, message, args) {
+    
+    if (!message.channel.guild) {
+      message.reply("Please try this command in a text channel.")
+      return
+    }
+    
+    
     let cheatedCard;
     let value = args.join(" ").match(/\d+/)
     if (value) {

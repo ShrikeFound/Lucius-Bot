@@ -4,6 +4,12 @@ module.exports = {
   name: 'draw',
   description: 'this is the description for the draw command',
   async execute(bot, message, args) {
+
+    if (!message.channel.guild) {
+      message.reply("Please try this command in a text channel.")
+      return
+    }
+
     let numDraws = args.join(" ").match(/\d+/)
     let Deck = {}
     if (!numDraws || !(args.join(" ").match(/\d+/)[0] > 0)) {
@@ -13,6 +19,7 @@ module.exports = {
     }
     console.log(numDraws);
     const admin = require('firebase-admin');
+    
     const guildID = message.channel.guild.id
     const userID = message.author.id
     const deckString = `channels/${guildID}/users/${userID}/twist_deck`
@@ -23,7 +30,15 @@ module.exports = {
       draw(Deck, numDraws);
       deckRef.set(Deck);
     }).then(() => {
-      message.author.send(`${JSON.stringify(Deck)}`);
+      handContent = Deck.hand.map((card) => {
+        if (card.value == 0 || card.value == 14) {
+          return `**${card.suit}** (${card.value})`
+        } else {
+          return `${card.value} of ${card.suit}`
+        }
+      })
+      // console.log(Deck);
+      message.author.send(`Cards in your hand (${Deck.hand.length}): ${handContent}. Number of cards in deck/discard: ${Deck.cards.length}/${Deck.discard.length}`);
     })
   }
 }

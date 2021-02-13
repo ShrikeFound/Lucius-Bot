@@ -64,16 +64,18 @@ const findSuit = (string) => {
 }
 
 const draw = (deck, numflips) => {
-  console.log("drawing...");
+  // console.log("drawing...");
   let drawnCards = []
   deck.cards = deck.cards || [];
   deck.hand = deck.hand || [];
   deck.discard = deck.discard || [];
+  // console.log( deck.hand.length,deck.cards.length, deck.discard.length);
   for (let i = 0; i < numflips; i++){
     if (deck.cards.length <= 0) {
-      console.log("no more cards in twist deck")
+      // console.log("no more cards in twist deck")
       if (deck.discard.length <= 0) break;
       deck.cards = deck.discard;
+      deck.discard = []
       shuffle(deck);
     }
     let drawnCard = deck.cards.shift();
@@ -85,14 +87,16 @@ const draw = (deck, numflips) => {
   deck.hand.sort((a, b) => {
     return a.value - b.value;
   });
-
+  // console.log( deck.hand.length, deck.cards.length,deck.discard.length);
 }
 
 
 const cheat = (deck, value, suit) => {
+  // console.log("in cheat function");
+  // console.log("first test, value: ",value, typeof value)
   deck.hand = deck.hand || [];
   deck.discard = deck.discard || [];
-  console.log(deck.hand);
+  console.log(deck);
   console.log(typeof value);
   let cheatedCard = deck.hand.find(card => {
     return card.value === value;
@@ -100,11 +104,14 @@ const cheat = (deck, value, suit) => {
   if (!cheatedCard) {
     return cheatedCard
   }
+  
+  // console.log("cheating value", value, typeof value);
+  
   deck.hand = deck.hand.filter(card => {
     return card.value !== value;
   })
   deck.discard = deck.discard.concat(cheatedCard);
-
+  console.log(deck);
   return cheatedCard;
 }
 
@@ -114,19 +121,20 @@ const test = () => {
 }
 
 const shuffle = (deck) => {
-  console.log("length before:",deck.cards.length,deck.discard && deck.discard.length);
-  console.log("shuffling...");
+  deck.hand = deck.hand || [];
+  deck.discard = deck.discard || []
+  deck.cards = deck.cards || []
+  // console.log("length before:", deck.hand.length,deck.cards.length, deck.discard.length,deck);
+  // console.log("shuffling...");
   deck.cards = deck.cards.concat(deck.discard || []);
-  deck.cards = deck.cards.concat(deck.hand || []);
   deck.discard = [];
-  deck.hand = [];
   for (var i = 0; i < 1000; i++) {
     var randomLocation = Math.floor(Math.random() * deck.cards.length);
     var temp = deck.cards[0];
     deck.cards[0] = deck.cards[randomLocation];
     deck.cards[randomLocation] = temp;
   }
-  console.log("length after:",deck.cards.length,deck.discard && deck.discard.length);
+  // console.log("length after:", deck.hand.length,deck.cards.length, deck.discard.length,deck);
 }
 
 

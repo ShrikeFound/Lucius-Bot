@@ -2,7 +2,13 @@ const { createDeck,draw } = require('../dealer.js');
 module.exports = {
   name: 'create',
   description: 'this is the description for the create command',
-  async execute(bot,message, args) {
+  async execute(bot, message, args) {
+
+    if (!message.channel.guild) {
+      message.reply("Please try this command in a text channel.")
+      return
+    }
+
     const definining_suit = args[0] || "unknown";
     const ascendant_suit = args[1] || "unknown";
     const center_suit = args[2] || "unknown";

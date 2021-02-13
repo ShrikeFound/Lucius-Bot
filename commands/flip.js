@@ -59,7 +59,14 @@ module.exports = {
     }).then((results) => {
       console.log("done!");
       console.log(flippedCards);
-      message.reply(`Cards flipped: ${JSON.stringify(flippedCards)}`);
+      const replyContent = flippedCards.map((card) => {
+        if (card.value == 0 || card.value == 14) {
+          return `**${card.suit}** (${card.value})`
+        } else {
+          return `${card.value} of ${card.suit}`
+        }
+      })
+      message.reply(`You flipped:${replyContent}`);
     });
 
   }
