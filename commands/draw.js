@@ -2,7 +2,7 @@ const {draw} = require('../dealer.js');
 const flip = require('./flip.js');
 module.exports = {
   name: 'draw',
-  description: 'this is the description for the draw command',
+  description: 'draws a number of cards from your twist deck to your control hand. Use `!draw [number]`',
   async execute(bot, message, args) {
 
     if (!message.channel.guild) {

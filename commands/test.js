@@ -1,6 +1,6 @@
 module.exports = {
   name: 'test',
-  description: 'this is the descriptionb for the test command',
+  description: 'this is a test command.',
   async execute(bot,message, args) {
     console.log("test complete!");
   }

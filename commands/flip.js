@@ -1,8 +1,14 @@
 const {shuffle} = require('../dealer.js')
 module.exports = {
   name: 'flip',
-  description: 'Show the fate deck.',
+  description: 'flips a number of cards from the fate deck. Use: `!flip [number]`. you can type `!flip` without a number to flip only 1 card.',
   async execute(bot, message, args) {
+
+    if (!message.channel.guild) {
+      message.reply("Please try this command in a text channel.")
+      return
+    }
+
     console.log("flipping..");
     let numFlips = args.join(" ").match(/\d+/)
     if (!numFlips || !(args.join(" ").match(/\d+/)[0] > 0)) {

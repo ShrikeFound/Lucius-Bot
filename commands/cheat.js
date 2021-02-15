@@ -2,7 +2,7 @@ const { findSuit,cheat } = require('../dealer.js');
 const flip = require('./flip.js');
 module.exports = {
   name: 'cheat',
-  description: 'this is the description for the cheat command',
+  description: 'cheats a card with the given value from your control hand. Use: `!cheat [card value]`',
   async execute(bot, message, args) {
     
     if (!message.channel.guild) {
