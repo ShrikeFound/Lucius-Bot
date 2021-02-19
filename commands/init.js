@@ -2,7 +2,7 @@ const {createDeck} = require('../dealer.js')
 const {suits, values } = require('../config.json');
 
 module.exports = {
-  name: 'init',
+  name: 'private_init',
   description: "this initializes channel settings and creates a fate deck if one doesn't exist",
   async execute(bot,message, args) {
     console.log("initializing!");

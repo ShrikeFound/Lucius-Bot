@@ -1,7 +1,7 @@
 const { createDeck,draw } = require('../dealer.js');
 module.exports = {
   name: 'create',
-  description: 'creates a twist deck from the four suits given. Use; !create [defining suit] [ascendant suit] [center suit] [descendant suit]',
+  description: 'creates a twist deck from the four suits given. Use `!create [defining suit] [ascendant suit] [center suit] [descendant suit]`',
   async execute(bot, message, args) {
 
     if (!message.channel.guild) {
