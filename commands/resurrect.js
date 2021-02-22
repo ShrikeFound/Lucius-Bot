@@ -1,6 +1,6 @@
 const {resurrect} = require('../dealer.js');
 module.exports = {
-  name: 'resurrect',
+  name: 'res',
   description: 'places a number of cards from your discard pile back into your hand. For when you cheat a little too early.',
   async execute(bot, message, args) {
     console.log("ressurecting!");
