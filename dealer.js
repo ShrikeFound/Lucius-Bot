@@ -84,9 +84,10 @@ const draw = (deck, numflips) => {
 
   deck.hand = deck.hand.concat(drawnCards);
 
-  deck.hand.sort((a, b) => {
-    return a.value - b.value;
-  });
+  //removed this to keep the drawing order consistent
+  // deck.hand.sort((a, b) => {
+  //   return a.value - b.value;
+  // });
   // console.log( deck.hand.length, deck.cards.length,deck.discard.length);
 }
 
