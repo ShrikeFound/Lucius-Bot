@@ -1,7 +1,7 @@
 const {shuffle} = require('../dealer.js')
 module.exports = {
-  name: 'flip',
-  description: 'flips a number of cards from the fate deck. Use: `!flip [number]`. you can type `!flip` without a number to flip only 1 card.',
+  name: 'unflip',
+  description: "Places a number of cards from the discard pile back unto the deck. Useful for when we flip a card too many but don't want to waste a Joker. Omitting a number will unflip one (1) card by default.",
   async execute(bot, message, args) {
 
     if (!message.channel.guild) {
@@ -35,14 +35,10 @@ module.exports = {
             fateDeck.hand = snapshot.val().hand || []
             fateDeck.discard = snapshot.val().discard || []
             fateDeck.cards = snapshot.val().cards || []
-            if (fateDeck.cards.length <= 0) {
-              if (fateDeck.discard.length <= 0) return;
-              fateDeck.cards = fateDeck.discard;
-              fateDeck.discard = [];
-              shuffle(fateDeck);
-              deckRef.update(fateDeck)
+            if (fateDeck.discard.length <= 0) {
+              return;
             }
-            flippedCard = fateDeck.cards.shift();
+            flippedCard = fateDeck.discard.shift();
             flippedCards.push(flippedCard);
             fateDeck.hand.unshift(flippedCard)
             deckRef.update(fateDeck)
@@ -51,19 +47,18 @@ module.exports = {
         }
 
         deckRef.once('value', (snapshot) => {
-          let discard = snapshot.val().discard || [];
+          let cards = snapshot.val().cards || [];
           const hand = snapshot.val().hand;
-          discard = hand.concat(discard)
+          cards = hand.concat(cards)
           deckRef.update({ "hand": [] })
-          deckRef.update({ "discard": discard })
+          deckRef.update({ "cards": cards })
         })
 
       } else {
         //whoops. error code of some sort.
-        console.log("couldn't find a deck to flip...");
+        console.log("couldn't find a deck to unflip...");
       }
     }).then((results) => {
-      console.log("done!");
       console.log(flippedCards);
       const replyContent = flippedCards.map((card) => {
         if (card.value == 0 || card.value == 14) {
@@ -72,7 +67,7 @@ module.exports = {
           return `${card.value} of ${card.suit}`
         }
       })
-      message.reply(`You flipped:${replyContent}`);
+      message.reply(`You unflipped:${replyContent}`);
     });
 
   }
