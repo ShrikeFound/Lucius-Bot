@@ -1,0 +1,9 @@
+{
+  "prefix"          : "!",
+  "suits"           : ["masks","rams","crows","tomes"],
+  "values"          : [1,2,3,4,5,6,7,8,9,10,11,12,13],
+  "definingValues"  : [1,5,9,13],
+  "ascendantValues" : [4,8,12],
+  "centerValues"    : [3,7,11],
+  "descendantValues": [2,6,10]
+}
