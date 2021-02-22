@@ -79,7 +79,7 @@ const draw = (deck, numflips) => {
       shuffle(deck);
     }
     let drawnCard = deck.cards.shift();
-    drawnCards.push(drawnCard);
+    drawnCards.unshift(drawnCard);
   }
 
   deck.hand = drawnCards.concat(deck.hand);
@@ -103,7 +103,7 @@ const undraw = (deck, numflips) => {
       // console.log("no more cards in twist deck")
       break;
     }
-    let drawnCard = deck.hand.pop();
+    let drawnCard = deck.hand.shift();
     drawnCards.unshift(drawnCard);
   }
 
@@ -130,18 +130,46 @@ const cheat = (deck, value, suit) => {
     return card.value === value;
   });
   if (!cheatedCard) {
+    console.log("couldn't find card");
     return cheatedCard
   }
-  
+
+
   // console.log("cheating value", value, typeof value);
   
   deck.hand = deck.hand.filter(card => {
     return card.value !== value;
   })
   deck.discard = deck.discard.concat(cheatedCard);
-  console.log(deck);
   return cheatedCard;
 }
+
+
+const resurrect = (deck, numflips) => {
+  // console.log("drawing...");
+  let drawnCards = []
+  deck.cards = deck.cards || [];
+  deck.hand = deck.hand || [];
+  deck.discard = deck.discard || [];
+  // console.log( deck.hand.length,deck.cards.length, deck.discard.length);
+  for (let i = 0; i < numflips; i++){
+    if (deck.discard.length <= 0) {
+      // console.log("no more cards in twist deck")
+      break;
+    }
+    let drawnCard = deck.discard.shift();
+    drawnCards.unshift(drawnCard);
+  }
+
+  deck.hand = drawnCards.concat(deck.hand);
+
+  //removed this to keep the drawing order consistent
+  // deck.hand.sort((a, b) => {
+  //   return a.value - b.value;
+  // });
+  // console.log( deck.hand.length, deck.cards.length,deck.discard.length);
+}
+
 
 
 const test = () => {
@@ -167,5 +195,5 @@ const shuffle = (deck) => {
 
 
 module.exports = {
-  createDeck,test,shuffle,draw,findSuit,cheat,undraw
+  createDeck,test,shuffle,draw,findSuit,cheat,undraw,resurrect
 }
