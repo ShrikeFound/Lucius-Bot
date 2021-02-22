@@ -1,5 +1,5 @@
 # Lucius Bot
- A Discord bot that connects to the firebase fate deck server 
+ A Discord bot that simulates a fate deck and player twist decks/control hands
 
 
 ## Commands
@@ -47,3 +47,8 @@ Discards a card with the given value from your control hand.
 places a number of cards from your graveyard back into your hand. For when you cheat a little too early.
 
 `!res [number]`
+
+
+## Troubleshooting
+
+if Lucius doesn't automatically create a fate deck for your guild, you can type `!private_init` to manually create it.
