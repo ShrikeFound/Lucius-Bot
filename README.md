@@ -51,4 +51,6 @@ places a number of cards from your graveyard back into your hand. For when you c
 
 ## Troubleshooting
 
-if Lucius doesn't automatically create a fate deck for your guild, you can type `!private_init` to manually create it.
+- if Lucius doesn't automatically create a fate deck for your guild, you can type `!private_init` to manually create it.
+
+- Lucius will respond to commands without a prefix if you mention it at the beginning of the message.
