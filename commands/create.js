@@ -22,7 +22,6 @@ module.exports = {
     let db = admin.database();
     let userRef = db.ref(userString);
     draw(twistDeck, 3)
-    console.log("after drawing..",twistDeck);
     userRef.once("value", ((snapshot)=> {
       userRef.update({ "id": userID ,"twist_deck":twistDeck})
       // const controlHand = createDeck()

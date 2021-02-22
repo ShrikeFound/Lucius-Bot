@@ -11,7 +11,7 @@ const createDeck = (suits, values, center, descendant) => {
     ascendant_values = [4, 8, 12];
     center_values = [3, 7, 11];
     descendant_values = [2, 6, 10];
-
+    console.log("I'm here!~~~~~~~~~~~~~~~~~~")
     function add_twist_set(values, suit) {
       suit = findSuit(suit);
       values.forEach((value) => {
