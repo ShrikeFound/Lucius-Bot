@@ -35,9 +35,7 @@ module.exports = {
             fateDeck.hand = snapshot.val().hand || []
             fateDeck.discard = snapshot.val().discard || []
             fateDeck.cards = snapshot.val().cards || []
-            if (fateDeck.discard.length <= 0) {
-              return;
-            }
+            if (fateDeck.discard.length <= 0) return;
             flippedCard = fateDeck.discard.shift();
             flippedCards.push(flippedCard);
             fateDeck.hand.unshift(flippedCard)

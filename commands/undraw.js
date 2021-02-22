@@ -1,7 +1,7 @@
-const {draw} = require('../dealer.js');
+const {undraw} = require('../dealer.js');
 module.exports = {
-  name: 'draw',
-  description: 'draws a number of cards from your twist deck to your control hand. Use `!draw [number]`',
+  name: 'undraw',
+  description: 'Places a a number of cards back unto the twist deck from your control hand. For when you draw too many cards.',
   async execute(bot, message, args) {
 
     if (!message.channel.guild) {
@@ -26,7 +26,7 @@ module.exports = {
     deckRef = db.ref(deckString)
     deckRef.once("value", (snapshot) => {
       Deck = snapshot.val();
-      draw(Deck, numDraws);
+      undraw(Deck, numDraws);
       deckRef.set(Deck);
     }).then(() => {
       handContent = Deck.hand.map((card) => {

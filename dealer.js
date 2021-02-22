@@ -79,10 +79,10 @@ const draw = (deck, numflips) => {
       shuffle(deck);
     }
     let drawnCard = deck.cards.shift();
-    drawnCards.unshift(drawnCard);
+    drawnCards.push(drawnCard);
   }
 
-  deck.hand = deck.hand.concat(drawnCards);
+  deck.hand = drawnCards.concat(deck.hand);
 
   //removed this to keep the drawing order consistent
   // deck.hand.sort((a, b) => {
@@ -90,6 +90,33 @@ const draw = (deck, numflips) => {
   // });
   // console.log( deck.hand.length, deck.cards.length,deck.discard.length);
 }
+
+const undraw = (deck, numflips) => {
+  // console.log("drawing...");
+  let drawnCards = []
+  deck.cards = deck.cards || [];
+  deck.hand = deck.hand || [];
+  deck.discard = deck.discard || [];
+  // console.log( deck.hand.length,deck.cards.length, deck.discard.length);
+  for (let i = 0; i < numflips; i++){
+    if (deck.hand.length <= 0) {
+      // console.log("no more cards in twist deck")
+      break;
+    }
+    let drawnCard = deck.hand.pop();
+    drawnCards.unshift(drawnCard);
+  }
+
+  deck.cards = drawnCards.concat(deck.cards);
+
+  //removed this to keep the drawing order consistent
+  // deck.hand.sort((a, b) => {
+  //   return a.value - b.value;
+  // });
+  // console.log( deck.hand.length, deck.cards.length,deck.discard.length);
+}
+
+
 
 
 const cheat = (deck, value, suit) => {
@@ -140,5 +167,5 @@ const shuffle = (deck) => {
 
 
 module.exports = {
-  createDeck,test,shuffle,draw,findSuit,cheat
+  createDeck,test,shuffle,draw,findSuit,cheat,undraw
 }
