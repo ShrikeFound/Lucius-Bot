@@ -15,6 +15,7 @@ module.exports = {
     let db = admin.database();
     let channelRef = db.ref(channelString);
     channelRef.once('value', (data) => {
+      console.log(data.val())
       if (!data.val()) {
         console.log("channel doesn't exist. Initializing...");
         channelRef.set({
