@@ -29,8 +29,17 @@ module.exports = {
       console.log("snapshot: ", snapshot)
       console.log("snapshot val: ", snapshot.val())
       console.log("snapshot key: ", snapshot.key)
-      removedCard = snapshot.val();
-      console.log(removedCard);
+      if (suit === "crows" | suit === "tomes" | suit === "rams" | suit === "masks") {
+        snapshot.forEach((card) => {
+          console.log(card)
+          console.log("card's suit: ",card.suit)
+        })
+      } else {
+        snapshot.forEach((card) => {
+          console.log("deleting this one: ", card);
+          return true;
+        })
+      }
     });
 
   }
