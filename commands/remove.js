@@ -22,13 +22,15 @@ module.exports = {
     const admin = require('firebase-admin');
     const guildID = message.channel.guild.id
     const userID = message.author.id
-    const deckString = `channels/${guildID}/users/${userID}/twist_deck`
+    const deckString = `channels/${guildID}/users/${userID}/twist_deck/cards`
     let db = admin.database();
     deckRef = db.ref(deckString)
     deckRef.orderByChild("value").equalTo(value).once("value", (snapshot) => {
       console.log("snapshot: ", snapshot)
       console.log("snapshot val: ", snapshot.val())
       console.log("snapshot key: ", snapshot.key)
+      removedCard = snapshot.val();
+      console.log(removedCard);
     });
 
   }
