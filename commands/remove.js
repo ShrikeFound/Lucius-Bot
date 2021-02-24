@@ -36,7 +36,7 @@ module.exports = {
         })
       } else {
         snapshot.forEach((card) => {
-          console.log("deleting this one: ", card);
+          console.log("deleting this one: ", card.val().key);
           return true;
         })
       }
