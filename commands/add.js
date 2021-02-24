@@ -17,9 +17,13 @@ module.exports = {
     let suit = args.join(" ").match(/\D+/)
     if (suit) {
       suit = findSuit(suit[0])
+    } else {
+      suit = "outcasts"
     }
 
-    const addedCard = { value, suit}
+    let value_suit = value+"_"+suit
+    let name = `${value} of ${suit}`
+    const addedCard = { value, suit, value_suit, name}
 
     const admin = require('firebase-admin');
     const guildID = message.channel.guild.id

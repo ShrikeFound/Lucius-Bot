@@ -11,11 +11,10 @@ const createDeck = (suits, values, center, descendant) => {
     ascendant_values = [4, 8, 12];
     center_values = [3, 7, 11];
     descendant_values = [2, 6, 10];
-    console.log("I'm here!~~~~~~~~~~~~~~~~~~")
     function add_twist_set(values, suit) {
       suit = findSuit(suit);
       values.forEach((value) => {
-        var card = { value: value, suit: suit };
+        var card = { value: value, suit: suit, value_suit: value+"_"+suit, name: value+" of "+suit };
         deck.cards.push(card);
       });
     }
@@ -28,12 +27,12 @@ const createDeck = (suits, values, center, descendant) => {
     console.log("creating fate deck");
     for (var i = 0; i < suits.length; i++) {
       for (var j = 0; j < values.length; j++) {
-        var card = { value: values[j], suit: suits[i] };
+        var card = { value: values[j], suit: suits[i], value_suit: values[j]+"_"+suits[i], name: values[j]+" of "+suits[i] };
         deck.cards.push(card);
       }
     }
-    deck.cards.push({ value: 0, suit: "Black Joker" })
-    deck.cards.push({value: 14, suit: "Red Joker" })
+    deck.cards.push({ value: 0, suit: "black_joker", value_suit: "0_black_joker", name: "Black Joker" })
+    deck.cards.push({value: 14, suit: "red_joker", value_suit: "14_red_joker", name: "Red Joker" })
   }
   shuffle(deck);
   return deck;
