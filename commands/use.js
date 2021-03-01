@@ -25,7 +25,7 @@ module.exports = {
     }
     console.log(useData);
     message.reply(args[0]);
-    characterRef.child(userID).set(useData)
+    characterRef.child("discord_users").push(useData)
 
     console.log("no errors using the use command.");
   }
