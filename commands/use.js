@@ -19,7 +19,7 @@ module.exports = {
       ignored: false,
       user: userID,
       guild: guildID,
-      guild_user: guild_ID+"_"+userID,
+      guild_user: guildID+"_"+userID,
       guild_name: message.channel.guild.name,
       nick_name: message.channel.guild.name
     }
